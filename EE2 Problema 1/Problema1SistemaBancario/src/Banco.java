@@ -23,6 +23,29 @@ class Conta {
             lock.unlock();
         }
     }
+
+    public void sacar(double quantia) throws InterruptedException {
+        lock.lock();
+        try {
+            while (saldo < quantia) {
+                System.out.println(Thread.currentThread().getName() + " (~~~) R$" + quantia + ". Saldo: R$" + saldo + ".");
+                saldoSuficiente.await();
+            }
+            saldo -= quantia;
+            System.out.println(Thread.currentThread().getName() + " (---) R$" + quantia + ". Saldo: R$" + saldo + ".");
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public double getSaldo() {
+        lock.lock();
+        try {
+            return saldo;
+        } finally {
+            lock.unlock();
+        }
+    }
 }
 
 class Pessoa implements Runnable {
@@ -38,7 +61,15 @@ class Pessoa implements Runnable {
 
     @Override
     public void run() {
-        conta.depositar(quantia);
+        try {
+            if (tipoOperacao) {
+                conta.depositar(quantia);
+            } else {
+                conta.sacar(quantia);
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 }
 
@@ -69,5 +100,7 @@ public class Banco {
                 t.interrupt();
             }
         }
+
+        System.out.println("Saldo final: R$" + contaCompartilhada.getSaldo() + ".");
     }
 }
