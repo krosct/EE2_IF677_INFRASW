@@ -160,7 +160,7 @@ class Cliente implements Runnable {
         try {
             System.out.println("----- Iniciando " + Thread.currentThread().getName() + ". SD: " + this.startDelay + " TJ: " + this.tempoParaComer);
             Thread.sleep(this.startDelay); //delay proposital para causar maior aleatoriedade nos eventos
-            //início das atividade a serem realizadas pelos clientes
+            //início das atividades a serem realizadas pelos clientes
             entrarEstabelecimento();
             procurarLugarESentar();
             sentar();

@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Main {
+public class Mainsem {
     //Classe que representa a ponte
     public static class Ponte{
         private int qtdCarrosDireita;

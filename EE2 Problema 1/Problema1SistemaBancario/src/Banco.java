@@ -86,6 +86,8 @@ public class Banco {
         pessoas.add(new Thread(new Pessoa(contaCompartilhada, true, 9988.0), "Pessoa3"));
         pessoas.add(new Thread(new Pessoa(contaCompartilhada, true, 7299.0), "Pessoa4"));
         pessoas.add(new Thread(new Pessoa(contaCompartilhada, false, 211.0), "Pessoa8"));
+        pessoas.add(new Thread(new Pessoa(contaCompartilhada, false, 100000.0), "Pessoa9"));
+        pessoas.add(new Thread(new Pessoa(contaCompartilhada, false, 100000.0), "Pessoa9"));
 
         // Inicia todas as threads
         for (Thread t: pessoas) {

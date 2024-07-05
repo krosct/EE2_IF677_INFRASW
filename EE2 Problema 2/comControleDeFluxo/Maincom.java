@@ -2,7 +2,7 @@ import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Main {
+public class Maincom {
 
     //Classe que representa a ponte
     public static class Ponte{
