@@ -1,6 +1,6 @@
 import java.util.concurrent.Semaphore;
 
-public class problema3 {
+public class problema3comfor {
     //Classe da barbearia ela vai ter duas funções importantes "EntrarNaBarbearia" e "cortarCabelo"
     public static  class Barbearia{
         public int assentos;
@@ -36,6 +36,7 @@ public class problema3 {
                     semaphorePorta.release();
                     semaphoreCorte.acquire();
                     //Após chegar sua vez ele libera o assento que ocupava e executa a função de corte
+                    semaphoreCadeiras.release();
                     assentosOcupados--;
                     this.cortarCabelo(nome);
                     semaphoreCorte.release();
@@ -65,7 +66,7 @@ public class problema3 {
         public void cortarCabelo(String nome) throws InterruptedException {
             System.out.println(nome + " está cortando o cabelo!...");
             Thread.sleep(3000);
-            System.out.println("-------------Finalizado--------------");
+            System.out.println("-------------Finalizado "+nome+"--------------");
 
             //Ao final de todo corte o barbeiro verifica se tem alguém sentado ainda, se não tiver ele vai descansar
             if (this.assentosOcupados == 0){
@@ -111,24 +112,18 @@ public class problema3 {
 
     public static void main(String[] args) throws InterruptedException {
         Barbeiro barbeiro = new Barbeiro();
-        Barbearia barbearia = new Barbearia(1,barbeiro);
-        Cliente cliente1 = new Cliente("Jefersson", barbearia);
-        Cliente cliente2 = new Cliente("JohnJohn", barbearia);
-        Cliente cliente3 = new Cliente("Jack", barbearia);
-        Cliente cliente4 = new Cliente("Jonas",barbearia);
-        Thread thread1 = new Thread(cliente1);
-        thread1.start();
-        Thread thread2 = new Thread(cliente2);
-        thread2.start();
-        Thread thread3 = new Thread(cliente3);
-        thread3.start();
-        //Nesse ponto é simulado o tempo de espera de 20s até o próximo cliente entrar o que da o tempo para que o
-        //barbeiro possa descansar
-        Thread.sleep(20000);
-        Thread thread4 = new Thread(cliente4);
-        thread4.start();
-
-
+        Barbearia barbearia = new Barbearia(5,barbeiro);
+        int count = 0;
+        for (int i = 0; i < 100; i++){
+            Cliente cliente = new Cliente("Cliente "+i, barbearia);
+            Thread thread1 = new Thread(cliente);
+            thread1.start();
+            if (count >9){
+                Thread.sleep(5000);
+                count = 0;
+            }
+            count++;
+        }
     }
 
 }
