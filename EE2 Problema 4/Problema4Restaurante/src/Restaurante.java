@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.locks.*;
 
 class Estabelecimento {
     public Semaphore saida; //semáforo para controlar a saída dos clientes e garantir a atomocidade em mesaCheia e sentados
@@ -15,7 +13,7 @@ class Estabelecimento {
 
     //método construtor do estabelecimento, que nesse caso é o restaurante
     public Estabelecimento(int numLugares, String nome) {
-        //todos os semáforos irão respeitar a ordem de chegada (FIFO)
+        // todos os semáforos irão respeitar a ordem de chegada (FIFO)
         this.saida = new Semaphore(1, true);
         this.sentar = new Semaphore(1, true);
         this.vagas = new Semaphore(numLugares, true);
