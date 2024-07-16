@@ -30,7 +30,7 @@ class Onibus implements Runnable {
         try {
             System.out.println(Thread.currentThread().getName() + " iniciará sua jornada.");
             while (qtdPassagem > 0) {
-                if (!partir.tryAcquire(3, TimeUnit.SECONDS)) { // Espera até todos os passageiros em espera embarcarem para partir
+                if (!partir.tryAcquire(500, TimeUnit.MILLISECONDS)) { // Espera até todos os passageiros em espera embarcarem para partir
                     System.out.println("Não tinha ninguém na parada, então " + Thread.currentThread().getName() + " passou direto!");
                 } else {
                     System.out.println(Thread.currentThread().getName() + " partindo com " + embarcado + " passageiro(s).");
@@ -64,7 +64,7 @@ class Onibus implements Runnable {
 
 public class Transporte {
     public static void main(String[] args) {
-        int qtdPassageiros = 537; // Quantidade de passageiros que tentarão embarcar no ônibus
+        int qtdPassageiros = 112; // Quantidade de passageiros que tentarão embarcar no ônibus
         
         
         // Passageiros
