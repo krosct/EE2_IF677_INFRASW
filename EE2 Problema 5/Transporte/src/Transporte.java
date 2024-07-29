@@ -32,7 +32,7 @@ class Onibus implements Runnable {
     }
 
     @Override
-    public void run() {
+    public void run() { // Atividade do ônibus
         try {
             atom.acquire();
             generalPrint(Thread.currentThread().getName(), "iniciará sua jornada.");
@@ -74,7 +74,7 @@ class Onibus implements Runnable {
         }
     }
     
-    public static void embarcar(Passageiro passageiro) throws InterruptedException {
+    public static void embarcar(Passageiro passageiro) throws InterruptedException { // Atividade do passageiro
         // ÁREA DA PARADA
         atom.acquire();
         parada++; // mais um passageiro na parada de ônibus
